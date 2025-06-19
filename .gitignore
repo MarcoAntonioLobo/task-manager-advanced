@@ -1,0 +1,42 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.sqlite3
+*.env
+*.db
+*.log
+
+# Virtualenv
+venv/
+env/
+ENV/
+.venv/
+
+# Docker
+*.pid
+*.sock
+.env
+.env.*
+
+# Alembic
+alembic/versions/*.pyc
+alembic/versions/*.pyo
+alembic/versions/__pycache__/
+
+# VSCode
+.vscode/
+
+# Pytest cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# System
+.DS_Store
+Thumbs.db
+
+# __init__ backup files
+*.bak
