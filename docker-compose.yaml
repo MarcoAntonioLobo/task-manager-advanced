@@ -24,16 +24,14 @@ services:
     image: postgres:15
     container_name: task_manager_db
     restart: always
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: taskdb
+    env_file:
+      - .env
     volumes:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user"]
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER}"]
       interval: 30s
       timeout: 10s
       retries: 5
@@ -58,6 +56,22 @@ services:
     depends_on:
       - redis
       - web
+    env_file:
+      - .env
+    volumes:
+      - .:/code
+
+  flower:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: task_manager_flower
+    command: ["sh", "-c", "flower --broker=redis://redis:6379/0 --port=5555"]
+    ports:
+      - "5555:5555"
+    depends_on:
+      - redis
+      - worker
     env_file:
       - .env
     volumes:
