@@ -6,6 +6,7 @@ alembic
 pydantic-settings
 python-dotenv
 passlib[bcrypt]
+pytest
 pyjwt
 redis
 celery
